@@ -91,7 +91,7 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/Original_package_tool
           pwd
-          zip -r AB_${{ github.event.inputs.REPACK_NAME }} SGSI/*
+          zip -r AB_${{ github.event.inputs.REPACK_NAME }} X/*
           ls "AB_${{ github.event.inputs.REPACK_NAME }}"
           echo "--------------------------------------"
           ls
