@@ -65,6 +65,7 @@ jobs:
         run: |
           cd ${{ github.workspace }}/Original_package_tool/
           sudo bash ./make.sh AB << EOF
+          
           n
           n
           ${{ github.event.inputs.OS_TYPE }}
