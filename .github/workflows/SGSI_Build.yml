@@ -37,7 +37,7 @@ jobs:
           sudo apt install -y git wget git zip unzip curl axel aria2
 
       - name: Get the OPT ..,
-        uses: actions/checkout@3
+        uses: actions/checkout@main
         with:
           repository: XPHNature/Original_package_tool
           path: Original_package_tool
