@@ -62,8 +62,10 @@ jobs:
           cd ${{ github.workspace }}/Original_package_tool/
           sudo bash ./make.sh AB << EOF
           
-          n
-          n
+          y
+          y
+          y
+          y
           ${{ github.event.inputs.OS_TYPE }}
           y
 
@@ -88,7 +90,7 @@ jobs:
       - name: Upload to Release‌‌...
         uses: ncipollo/release-action@v1.8.0
         with:
-          artifacts: "${{ github.workspace }}/Original_package_tool/upload_ab/*,${{ github.workspace }}/Tool-SGSI-build/upload_aonly/*"
+          artifacts: "${{ github.workspace }}/Original_package_tool/upload_ab/*"
           tag: "${{ github.event.inputs.REPACK_NAME }}_${{ env.BUILD_TIME }}"
-          bodyFile: "${{ github.workspace }}/Original_package_tool/SGSI/build_info.txt"
+          bodyFile: "${{ github.workspace }}/Original_package_tool/X/build_info.txt"
           token: ${{ secrets.GITHUB_TOKEN }}
