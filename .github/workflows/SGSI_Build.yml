@@ -84,6 +84,7 @@ jobs:
           echo "--------------------------------------"
 
       - name: Upload to Release‌‌...
+        if: ${{ env.ALI }} != '1'
         uses: ncipollo/release-action@v1.8.0
         with:
           artifacts: "${{ github.workspace }}/Original_package_tool/upload_ab/*"
