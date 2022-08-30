@@ -32,7 +32,7 @@ jobs:
 
       - name: Configuration Environment‌‌...
         run: |
-          sudo apt install -y git wget git zip unzip curl axel aria2
+          sudo apt install -y git wget git zip unzip curl axel aria2 zstd rename
 
       - name: Get the OPT ..,
         uses: actions/checkout@main
@@ -68,6 +68,7 @@ jobs:
           
 
       - name: Packing(AB)...
+        if: ${{ github.event.inputs.ALI }} != '1'
         run: |
           cd $GITHUB_WORKSPACE/Original_package_tool
           pwd
@@ -94,7 +95,14 @@ jobs:
           bodyFile: "${{ github.workspace }}/Original_package_tool/X/build_info.txt"
           token: ${{ secrets.GITHUB_TOKEN }}
       
+      - name: Packing(AB)...
+        if: ${{ github.event.inputs.ALI }} == '1'
+        run: |
+          zstd ${{ github.workspace }}/Original_package_tool/X/system.img -o ${{ github.workspace }}/Original_package_tool/X/system.img.zst
+          rm ${{ github.workspace }}/Original_package_tool/X/system.img -f
+          cp -a ${{ github.workspace }}/Original_package_tool/X/ ${{ github.workspace }}/Original_package_tool/X_${{ env.BUILD_TIME }}/
+
       - name: Upload to AliClod
         if: ${{ github.event.inputs.ALI }} == '1'
         run: |
-          python3 ${{ github.workspace }}/Action_OPT/AliUpdate.py ${{ github.workspace }}/Original_package_tool/upload_ab/ ${{ secrets.refresh_token }}
+          python3 ${{ github.workspace }}/Action_OPT/AliUpdate.py ${{ github.workspace }}/Original_package_tool/X_${{ env.BUILD_TIME }}/ ${{ secrets.refresh_token }}
