@@ -15,10 +15,6 @@ on:
         description: 'OS_TYPE'
         required: true
         default: 'flyme'
-      SGSI_TYPE:
-        description: 'SGSI_TYPE(AB, A, or BOTH)'
-        required: true
-        default: 'AB'
       REPACK_NAME:
         description: 'REPACK_NAME'
         required: true
@@ -26,7 +22,7 @@ on:
         
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Get the source code of this repositorie...
@@ -65,19 +61,16 @@ jobs:
           sudo apt-get -y --purge remove "adoptopenjdk-11-hotspot"
           java -version
 
-      - name: Make AB type GSI‌‌...
-        if: ${{ github.event.inputs.SGSI_TYPE }} == 'AB' || ${{ github.event.inputs.SGSI_TYPE }} == 'BOTH'
+      - name: Start Build
         run: |
-          sudo bash $GITHUB_WORKSPACE/Original_package_tool/make.sh AB << EOF
-          ${{ github.event.inputs.ZIP_NAME }}
-          y
-          y
-          y
+          cd ${{ github.workspace }}/SGSI-build-tool-11/
+          sudo bash ./make.sh AB << EOF
+          n
+          n
           ${{ github.event.inputs.OS_TYPE }}
           y
 
       - name: Packing(AB)...
-        if: ${{ github.event.inputs.SGSI_TYPE }} == 'AB' || ${{ github.event.inputs.SGSI_TYPE }} == 'BOTH'
         run: |
           cd $GITHUB_WORKSPACE/Original_package_tool
           pwd
