@@ -25,7 +25,8 @@ jobs:
       - name: Get variable configuration...
         run: |
           echo "BUILD_TIME=$(date +%s | md5sum | awk '{print substr($1,1,10)}')" >> $GITHUB_ENV
-          echo "ALI=$(source $GITHUB_WORKSPACE/Action_OPT/Config.sh)" >> $GITHUB_ENV
+          . $GITHUB_WORKSPACE/Action_OPT/Config.sh
+          echo "ALI=$?" >> $GITHUB_ENV
 
       - name: Configuration Environment‌‌...
         run: |
