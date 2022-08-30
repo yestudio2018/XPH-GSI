@@ -7,10 +7,6 @@ on:
         description: 'ROM_URL'
         required: true
         default: 'https://download.meizu.com/Firmware/Flyme/meizu18/9.3.6.0/cn/20220816093509/f3329633/update.zip'
-      OS_TYPE:
-        description: 'OS_TYPE'
-        required: true
-        default: 'flyme'
       REPACK_NAME:
         description: 'REPACK_NAME'
         required: true
@@ -65,13 +61,7 @@ jobs:
           cd ${{ github.workspace }}/Original_package_tool/
           sudo bash ./make.sh AB << EOF
           
-          y
-          y
-          y
-          y
-          ${{ github.event.inputs.OS_TYPE }}
-          y
-
+          
       - name: Packing(AB)...
         run: |
           cd $GITHUB_WORKSPACE/Original_package_tool
