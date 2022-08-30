@@ -54,14 +54,14 @@ jobs:
           sudo bash $GITHUB_WORKSPACE/Original_package_tool/setup.sh
           sudo apt-get -y --purge remove "adoptopenjdk-11-hotspot"
           java -version
-          cp $GITHUB_WORKSPACE/Action_OPT/Config.sh $GITHUB_WORKSPACE/Original_package_tool/
+          cp $GITHUB_WORKSPACE/Action_OPT/Config.sh $GITHUB_WORKSPACE/Original_package_tool/ -r
 
       - name: Start Build
         run: |
           cd ${{ github.workspace }}/Original_package_tool/
           sudo bash ./make.sh AB << EOF
           
-          
+
       - name: Packing(AB)...
         run: |
           cd $GITHUB_WORKSPACE/Original_package_tool
