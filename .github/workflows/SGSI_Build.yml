@@ -63,7 +63,7 @@ jobs:
 
       - name: 下载ROM...
         run: |
-          cd $GITHUB_WORKSPACE/Tool-SGSI-buildTool-SGSI-build
+          cd $GITHUB_WORKSPACE/Original_package_tool
           mkdir ./tmp
           wget -U "Mozilla/5.0" ${{ github.event.inputs.ROM_URL }} -O "$GITHUB_WORKSPACE/Original_package_tool/tmp/${{ github.event.inputs.ZIP_NAME }}"
           echo "zip_file: $(ls "$GITHUB_WORKSPACE/Original_package_tool/tmp/")"
