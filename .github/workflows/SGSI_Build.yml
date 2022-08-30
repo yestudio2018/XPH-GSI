@@ -49,8 +49,8 @@ jobs:
       - name: 下载ROM...
         run: |
           cd $GITHUB_WORKSPACE/Original_package_tool
-          mkdir ./tmp
-          cd ./tmp
+          mkdir tmp
+          cd tmp
           aria2c -x 16 --check-certificate=false ${{ github.event.inputs.ROM_URL }}
           echo "zip_file: $(ls "$GITHUB_WORKSPACE/Original_package_tool/tmp/")"
 
