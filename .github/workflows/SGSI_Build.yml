@@ -25,6 +25,7 @@ jobs:
       - name: Get variable configuration...
         run: |
           echo "BUILD_TIME=$(date +%s | md5sum | awk '{print substr($1,1,10)}')" >> $GITHUB_ENV
+          echo "ALI=$(source $GITHUB_WORKSPACE/Action_OPT/Config.sh)" >> $GITHUB_ENV
 
       - name: Configuration Environment‌‌...
         run: |
@@ -55,6 +56,7 @@ jobs:
           sudo apt-get -y --purge remove "adoptopenjdk-11-hotspot"
           java -version
           cp $GITHUB_WORKSPACE/Action_OPT/Config.sh $GITHUB_WORKSPACE/Original_package_tool/ -r
+          pip3 install aligo
 
       - name: Start Build
         run: |
@@ -87,3 +89,8 @@ jobs:
           tag: "${{ github.event.inputs.REPACK_NAME }}_${{ env.BUILD_TIME }}"
           bodyFile: "${{ github.workspace }}/Original_package_tool/X/build_info.txt"
           token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Upload to AliClod
+        if: ${{ env.ALI }} == '1'
+        run: |
+          python3 ${{ github.workspace }}/Original_package_tool/upload_ab/ ${{ secrets.refresh_token }}
