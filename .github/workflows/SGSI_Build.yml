@@ -36,23 +36,15 @@ jobs:
         run: |
           echo "BUILD_TIME=$(date +%s | md5sum | awk '{print substr($1,1,10)}')" >> $GITHUB_ENV
 
-      - name: Clean up the environment‌‌...
-        run: |
-          docker rmi `docker images -q`
-          sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d
-          sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php*
-          sudo -E apt-get update
-          sudo -E apt-get -y autoremove --purge
-          sudo -E apt-get clean
-          df -h
-
       - name: Configuration Environment‌‌...
         run: |
-          sudo apt-get install -y git wget git zip unzip curl axel
+          sudo apt install -y git wget git zip unzip curl axel aria2
 
       - name: Get the OPT ..,
-        run: |
-          git clone --recurse-submodules https://github.com/XPHNature/Original_package_tool $GITHUB_WORKSPACE/Original_package_tool
+        uses: actions/checkout@3
+        with:
+          repository: XPHNature/Original_package_tool
+          path: Original_package_tool
 
       - name: Replace custom condensed content...
         run: |
@@ -62,7 +54,8 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/Original_package_tool
           mkdir ./tmp
-          wget -U "Mozilla/5.0" ${{ github.event.inputs.ROM_URL }} -O "$GITHUB_WORKSPACE/Original_package_tool/tmp/${{ github.event.inputs.ZIP_NAME }}"
+          cd ./tmp
+          aria2c -x 16 --check-certificate=false ${{ github.event.inputs.ROM_URL }}
           echo "zip_file: $(ls "$GITHUB_WORKSPACE/Original_package_tool/tmp/")"
 
       - name: Configuration tool environment...
