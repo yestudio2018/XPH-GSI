@@ -97,4 +97,4 @@ jobs:
       - name: Upload to AliClod
         if: ${{ github.event.inputs.ALI }} == '1'
         run: |
-          python3 ${{ github.workspace }}/Original_package_tool/upload_ab/ ${{ secrets.refresh_token }}
+          python3 ${{ github.workspace }}/Action_OPT/AliUpdate.py ${{ github.workspace }}/Original_package_tool/upload_ab/ ${{ secrets.refresh_token }}
