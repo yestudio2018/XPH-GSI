@@ -10,7 +10,7 @@ on:
       ALI:
         description: '是否上传阿里云盘'
         required: true
-        default: '0'
+        default: '1'
       REPACK_NAME:
         description: 'REPACK_NAME'
         required: true
