@@ -91,7 +91,7 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/Original_package_tool
           pwd
-          7za a -t7z -r AB_${{ github.event.inputs.REPACK_NAME }} X/system.img
+          7za a -t7z -r AB_${{ github.event.inputs.REPACK_NAME }} X/*
           ls "AB_${{ github.event.inputs.REPACK_NAME }}"
           echo "--------------------------------------"
           ls
