@@ -23,10 +23,7 @@ on:
         description: 'REPACK_NAME'
         required: true
         default: 'ROM.7z'
-
-
-
-
+        
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -80,9 +77,9 @@ jobs:
         run: |
           sudo bash $GITHUB_WORKSPACE/Original_package_tool/make.sh AB << EOF
           ${{ github.event.inputs.ZIP_NAME }}
-          y #修复亮度
-          y #PHH化
-          y #一键删除NFC
+          y
+          y
+          y
           ${{ github.event.inputs.OS_TYPE }}
           y
 
