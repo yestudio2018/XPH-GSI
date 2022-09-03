@@ -1,4 +1,4 @@
-name: SGSI_Build
+name: OP_Build
 
 on:
   workflow_dispatch:
@@ -10,7 +10,7 @@ on:
       ALI:
         description: '是否上传阿里云盘'
         required: true
-        default: '1'
+        default: '0'
       REPACK_NAME:
         description: 'REPACK_NAME'
         required: true
