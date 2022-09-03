@@ -21,20 +21,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Get the source code of this repositorie...
+      - name: 获取此存储库的源代码...
         uses: actions/checkout@main
         with: 
           path: Action_OPT
 
-      - name: Get variable configuration...
+      - name: 获取变量配置...
         run: |
           echo "BUILD_TIME=$(date +%s | md5sum | awk '{print substr($1,1,10)}')" >> $GITHUB_ENV
 
-      - name: Configuration Environment‌‌...
+      - name: 配置环境‌‌...
         run: |
           sudo apt install -y git wget git zip unzip curl axel aria2 zstd rename
 
-      - name: Get the OPT ..,
+      - name: 获取原包工具...
         uses: actions/checkout@main
         with:
           repository: XPHNature/Original_package_tool
@@ -52,7 +52,7 @@ jobs:
           aria2c -x 16 --check-certificate=false ${{ github.event.inputs.ROM_URL }}
           echo "zip_file: $(ls "$GITHUB_WORKSPACE/Original_package_tool/tmp/")"
 
-      - name: Configuration tool environment...
+      - name: 配置工具环境...
         run: |
           sudo sed -i 's/USE_MIRROR_FOR_PIP\=true/USE_MIRROR_FOR_PIP\=false/' $GITHUB_WORKSPACE/Original_package_tool/setup.sh
           sudo bash $GITHUB_WORKSPACE/Original_package_tool/setup.sh
@@ -61,13 +61,13 @@ jobs:
           cp $GITHUB_WORKSPACE/Action_OPT/Config.sh $GITHUB_WORKSPACE/Original_package_tool/ -r
           pip3 install aligo
 
-      - name: Start Build
+      - name: 开始处理原包...
         run: |
           cd ${{ github.workspace }}/Original_package_tool/
           sudo bash ./make.sh AB << EOF
           
 
-      - name: Packing(AB)...
+      - name: 压缩中...（AB）
         if: ${{ github.event.inputs.ALI }} != '1'
         run: |
           cd $GITHUB_WORKSPACE/Original_package_tool
@@ -86,7 +86,7 @@ jobs:
           ls upload_ab
           echo "--------------------------------------"
 
-      - name: Upload to Release‌‌...
+      - name: 开始上传至Releases
         if: ${{ github.event.inputs.ALI }} != '1'
         uses: ncipollo/release-action@v1.8.0
         with:
@@ -95,14 +95,14 @@ jobs:
           bodyFile: "${{ github.workspace }}/Original_package_tool/X/build_info.txt"
           token: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: Packing(AB)...
+      - name: 压缩中...（AB）
         if: ${{ github.event.inputs.ALI }} == '1'
         run: |
           zstd ${{ github.workspace }}/Original_package_tool/X/system.img -o ${{ github.workspace }}/Original_package_tool/X/system.img.zst
           rm ${{ github.workspace }}/Original_package_tool/X/system.img -f
           cp -a ${{ github.workspace }}/Original_package_tool/X/ ${{ github.workspace }}/Original_package_tool/X_${{ env.BUILD_TIME }}/
 
-      - name: Upload to AliClod
+      - name: 上传至阿里云...
         if: ${{ github.event.inputs.ALI }} == '1'
         run: |
           python3 ${{ github.workspace }}/Action_OPT/AliUpdate.py ${{ github.workspace }}/Original_package_tool/X_${{ env.BUILD_TIME }}/ ${{ secrets.refresh_token }}
