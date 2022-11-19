@@ -1,5 +1,5 @@
-nfc=y
-light=y
-phh=y
+nfc=n
+light=n
+phh=n
 fix=flyme
-fixbug=y
+fixbug=n
