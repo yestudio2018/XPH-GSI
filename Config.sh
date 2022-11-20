@@ -1,5 +1,5 @@
 nfc=n
 light=n
-phh=n
+phh=y
 fix=flyme
 fixbug=n
