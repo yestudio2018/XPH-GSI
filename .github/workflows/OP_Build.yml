@@ -94,15 +94,3 @@ jobs:
           tag: "${{ github.event.inputs.REPACK_NAME }}_${{ env.BUILD_TIME }}"
           bodyFile: "${{ github.workspace }}/Original_package_tool/X/build_info.txt"
           token: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: 压缩中...（AB）
-        if: ${{ github.event.inputs.ALI }} == '1'
-        run: |
-          zstd ${{ github.workspace }}/Original_package_tool/X/system.img -o ${{ github.workspace }}/Original_package_tool/X/system.img.zst
-          rm ${{ github.workspace }}/Original_package_tool/X/system.img -f
-          cp -a ${{ github.workspace }}/Original_package_tool/X/ ${{ github.workspace }}/Original_package_tool/X_${{ env.BUILD_TIME }}/
-
-      - name: 上传至阿里云...
-        if: ${{ github.event.inputs.ALI }} == '1'
-        run: |
-          python3 ${{ github.workspace }}/Action_OPT/AliUpdate.py ${{ github.workspace }}/Original_package_tool/X_${{ env.BUILD_TIME }}/ ${{ secrets.refresh_token }}
