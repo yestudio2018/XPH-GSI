@@ -63,7 +63,7 @@ jobs:
           sudo bash ./make.sh AB << EOF
           
 
-      - name: 压缩中...（AB）
+      - name: 压缩中...
         if: ${{ github.event.inputs.ALI }} != '1'
         run: |
           cd $GITHUB_WORKSPACE/Original_package_tool
