@@ -6,11 +6,11 @@ on:
       ROM_URL:
         description: 'ROM_URL'
         required: true
-        default: 'https://dl3.smartisan.com/ota/mol.darwin-ard11-rom-8.5.0-SEKSA.darwin-user/202207181841/8.5.3-202207181710-user-drw-afb56dfbfc.zip'
+        default: 'https://www.miaofile.com/api/v3/file/source/163615/paper_sagit-MIUI14-miuir-user_eab49701_11.0.zip?sign=Fp8y9tHlmCXxFdZbbjg3PfNdSQ3qzAmc1wn343zLhe4%3D%3A0'
       REPACK_NAME:
         description: 'REPACK_NAME'
         required: true
-        default: 'ROM.7z'
+        default: 'paper_sagit-MIUI14-miuir-user_eab49701_11.0.zip'
         
 jobs:
   build:
