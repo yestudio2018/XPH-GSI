@@ -6,15 +6,15 @@ on:
       ROM_URL:
         description: 'ROM_URL'
         required: true
-        default: 'https://dl3.smartisan.com/ota/mol.darwin-ard11-rom-8.5.0-SEKSA.darwin-user/202207181841/8.5.3-202207181710-user-drw-afb56dfbfc.zip'
+        default: 'https://firmware.meizu.com/Firmware/Flyme/meizu17/9.2.0.2/cn/20220114164709/f9c0f11f/update.zip'
       REPACK_NAME:
         description: 'REPACK_NAME'
         required: true
-        default: 'ROM.7z'
+        default: 'update.zip'
         
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
       - name: 获取此存储库的源代码...
