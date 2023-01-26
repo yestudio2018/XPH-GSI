@@ -33,7 +33,7 @@ jobs:
       - name: 获取原包工具...
         uses: actions/checkout@main
         with:
-          repository: XPHNature/Original_package_tool
+          repository: hua3354/Original_package_tool
           path: Original_package_tool
 
       - name: Replace custom condensed content...
